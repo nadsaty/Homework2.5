@@ -1,8 +1,10 @@
 package exeption;
+
 public class DataVerification {
     private static final int MAX_LENGTH = 20;
     public static final String LEGAL_CHARACTERS = "qwertyuiopasdfghjklzxcvbnm1234567890_QWERTYUIOPASDFGHJKLZXCVBNM";
 
+    //Проверка логина и пароля
     public static void verification(String login, String password, String confirmPassword) {
         loginVerification(login);
         passwordVerification(password, confirmPassword);
@@ -12,28 +14,27 @@ public class DataVerification {
     public static void loginVerification(String login) {
         for (int i = 0; i < login.length(); ++i) {
             if (LEGAL_CHARACTERS.indexOf(login.charAt(i)) == -1) {
-                throw new IfLoginIsWrong("Логин содержит недопустимые символы!");
+                throw new WrongLoginException("Логин содержит недопустимые символы!");
             }
         }
         if (login.length() > MAX_LENGTH) {
-            throw new IfLoginIsWrong("Длина логина не должна превышать " + MAX_LENGTH + " символов!");
+            throw new WrongLoginException("Длина логина не должна превышать " + MAX_LENGTH + " символов!");
         }
     }
-
 
     //Проверка пароля
     public static void passwordVerification(String password, String confirmPassword) {
         for (int i = 0; i < password.length(); ++i) {
             if (LEGAL_CHARACTERS.indexOf(password.charAt(i)) == -1) {
-                throw new IfPasswordIsWrong("Пароль содержит недопустимые символы!");
+                throw new WrongPasswordException("Пароль содержит недопустимые символы!");
             }
         }
 
         if (password.length() > MAX_LENGTH) {
-            throw new IfLoginIsWrong("Длина пароля не должна превышать " + MAX_LENGTH + " символов!");
+            throw new WrongPasswordException("Длина пароля не должна превышать " + MAX_LENGTH + " символов!");
         }
         if (!password.equals(confirmPassword)) {
-            throw new IfLoginIsWrong("Пароли не совпадают!");
+            throw new WrongPasswordException("Пароли не совпадают!");
         }
     }
 }

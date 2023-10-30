@@ -1,19 +1,20 @@
 import exeption.DataVerification;
-import exeption.IfLoginIsWrong;
-import exeption.IfPasswordIsWrong;
+import exeption.WrongLoginException;
+import exeption.WrongPasswordException;
 
 public class Main {
     public static void main(String[] args) {
-        String login = "nadsaty333!";
+        String login = "nadsaty333";
         String password = "password333";
         String confirmPassword = "password333";
 
         try {
             DataVerification.verification(login, password, confirmPassword);
-        } catch (IfLoginIsWrong ifLoginIsWrong) {
-            System.out.println(ifLoginIsWrong);
-        } catch (IfPasswordIsWrong ifPasswordIsWrong) {
-            System.out.println(ifPasswordIsWrong);
+            System.out.println("Верификация успешно завершена!");
+        } catch (WrongLoginException ifLoginIsWrong) {
+            ifLoginIsWrong.printStackTrace();
+        } catch (WrongPasswordException ifPasswordIsWrong) {
+            ifPasswordIsWrong.printStackTrace();
         }
     }
 }
